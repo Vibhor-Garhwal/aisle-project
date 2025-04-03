@@ -7,8 +7,4 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//all request coming to the /api/v1 gp to the main router
-app.use("/api/v1", mainrouter);
-
-
 app.listen(3000);

@@ -16,6 +16,7 @@ const ShopLayout = () => {
             <ShopSection sectionName="Entry" gridPosition={{ column: '12 / span 1', row: '-1 / span 2' }} />
             <ShopSection sectionName="Aisle 1" gridPosition={{ column: '5 / span 8', row: '1 / span 1' }} />
             <ShopSection sectionName="Aisle 2" gridPosition={{ column: '5 / span 8', row: '5 / span 1' }} />
+            <ShopSection sectionName="Aisle 3" gridPosition={{ column: '1 / span 1', row: '1 / span 7' }} />
         </div>
     );
 };
@@ -70,6 +71,9 @@ const RadarData = ({ data, closeModal }) => {
             style={{
                 width: '300px',
                 height: '500px',
+                // backgroundColor:'#E4EFE7',
+                borderRadius: '29px',
+                padding:'10px',
                 border: '1px solid black',
                 position: 'fixed', // Use fixed positioning to center relative to the viewport
                 top: '50%', // Center vertically
