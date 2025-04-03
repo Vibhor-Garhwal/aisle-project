@@ -1,2 +1,46 @@
-AisleOrganizer-backend\node_modules
-AisleOrganizer-frontend\node_modules
+# Ignore node_modules folders
+AisleOrganizer-backend/node_modules
+AisleOrganizer-frontend/node_modules
+
+# Ignore build and dist folders
+AisleOrganizer-backend/build
+AisleOrganizer-frontend/build
+AisleOrganizer-frontend/dist
+
+# Ignore environment files
+AisleOrganizer-backend/.env
+AisleOrganizer-frontend/.env
+
+# Ignore logs
+AisleOrganizer-backend/logs
+AisleOrganizer-backend/*.log
+AisleOrganizer-frontend/logs
+AisleOrganizer-frontend/*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Ignore coverage reports
+AisleOrganizer-backend/coverage
+AisleOrganizer-frontend/coverage
+
+# Ignore npm debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore lock files (optional, depending on your workflow)
+package-lock.json
+yarn.lock
