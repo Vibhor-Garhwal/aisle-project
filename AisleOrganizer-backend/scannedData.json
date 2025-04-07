@@ -1,0 +1,23 @@
+{
+    "details":[
+        {   "Num": "1",
+            "EPC": "54-34-23-AC",
+            "Device ID": "HGN783HJ",
+            "Last Read Time": "2025-04-01 18:02:12",
+            "ASCI Value": "TCSL"
+        },
+        {   "Num": "2",
+            "EPC": "54-G5-AH-AC",
+            "Device ID": "HGN783HJ",
+            "Last Read Time": "2025-04-01 18:02:12",
+            "ASCI Value": "TCSL"
+        },
+        {
+            "Num": "3",
+            "EPC": "45-G5-AH-12",
+            "Device ID": "HJF83HJ",
+            "Last Read Time": "2024-01-11 13:22:12",
+            "ASCI Value": "TCSL"
+          }
+    ]
+}

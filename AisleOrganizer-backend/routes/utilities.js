@@ -1,13 +1,11 @@
 function createProductJSON(length) {
   let result = [];
-
   for (let i = 0; i < length; i++) {
     let radar = createRandomRadar();
     let product = createRandomProductId();
     let linkedRadar = getDifferentRadar(radar); // Ensure it's different
     result.push({ radar, product, linkedRadar });
   }
-
   return result;
 }
 
