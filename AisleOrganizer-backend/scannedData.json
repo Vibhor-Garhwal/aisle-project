@@ -19,5 +19,87 @@
             "Last Read Time": "2024-01-11 13:22:12",
             "ASCI Value": "TCSL"
           }
+    ],
+    "scannedSKU":[
+        {
+            "zone": "C",
+            "SKU": 1
+        },
+        {
+            "zone": "A",
+            "SKU": 2
+        },
+        {
+            "zone": "B",
+            "SKU": 3
+        },
+        {
+            "zone": "A",
+            "SKU": 4
+        },
+        {
+            "zone": "B",
+            "SKU": 5
+        },
+        {
+            "zone": "A",
+            "SKU": 6
+        },
+        {
+            "zone": "A",
+            "SKU": 7
+        },
+        {
+            "zone": "B",
+            "SKU": 8
+        },
+        {
+            "zone": "B",
+            "SKU": 9
+        },
+        {
+            "zone": "A",
+            "SKU": 10
+        },
+        {
+            "zone": "B",
+            "SKU": 11
+        },
+        {
+            "zone": "A",
+            "SKU": 12
+        },
+        {
+            "zone": "A",
+            "SKU": 13
+        },
+        {
+            "zone": "B",
+            "SKU": 14
+        },
+        {
+            "zone": "B",
+            "SKU": 15
+        },
+        {
+            "zone": "A",
+            "SKU": 16
+        },
+        {
+            "zone": "B",
+            "SKU": 17
+        },
+        {
+            "zone": "C",
+            "SKU": 18
+        },
+        {
+            "zone": "B",
+            "SKU": 19
+        },
+        {
+            "zone": "C",
+            "SKU": 20
+        }
     ]
 }

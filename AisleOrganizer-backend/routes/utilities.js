@@ -1,3 +1,5 @@
+const { createResponse2 } = require("../createResponse");
+
 function createProductJSON(length) {
   let result = [];
   for (let i = 0; i < length; i++) {
@@ -29,7 +31,7 @@ function createRandomRadar() {
 
 // Ensures `linkedRadar` is different from `radar`
 function getDifferentRadar(currentRadar) {
-  const availableRadars = ["R1", "R2", "R3"].filter(r => r !== currentRadar);
+  const availableRadars = ["R1", "R2", "R3"].filter((r) => r !== currentRadar);
   return availableRadars[randomUtility(availableRadars.length)];
 }
 
@@ -43,4 +45,34 @@ function createResponseJSON(productData) {
   }, {});
 }
 
-module.exports = { createProductJSON, createResponseJSON };
+async function groupByCurrentZone() {
+  // Get the response from createResponse2
+  const response = await createResponse2();
+
+  // Initialize an empty object to group by zones
+  const groupedByZone = {};
+
+  // Iterate through the response and group by currentZone
+  response.forEach((item) => {
+    const zone = item.currentZone;
+
+    // If the zone doesn't exist in the grouped object, initialize it as an array
+    if (!groupedByZone[zone]) {
+      groupedByZone[zone] = [];
+    }
+
+    // Add the current item to the corresponding zone
+    groupedByZone[zone].push({
+      SKU: item.SKU,
+      CorrectlyPlaced: item.CorrectlyPlaced,
+      correctZone: item.correctZone,
+    });
+  });
+
+  return groupedByZone;
+}
+
+// Example usage
+// groupByCurrentZone().then((groupedData) => console.log(groupedData));
+
+module.exports = { createProductJSON, createResponseJSON, groupByCurrentZone };

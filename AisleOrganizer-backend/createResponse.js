@@ -1,7 +1,3 @@
-// import { log } from 'console';
-
-const { log } = require("console");
-
 const fs = require("fs").promises;
 
 async function createResponse() {
@@ -71,4 +67,41 @@ async function createResponse() {
 }
 // createResponse().then((res) => console.log(res));
 
-module.exports = createResponse;
+async function createResponse2() {
+  const productRaw = await fs.readFile("./productData.json", "utf-8");
+  const scannedRaw = await fs.readFile("./scannedData.json", "utf-8");
+  const scannedData = JSON.parse(scannedRaw);
+  const productData = JSON.parse(productRaw);
+
+  // console.log(scannedData);
+  // console.log(productData);
+  const scannedSKU = scannedData.scannedSKU;
+  const productDetails = productData.data;
+
+  // console.log(scannedSKU);
+  // console.log(productDetails);
+
+  const response = scannedSKU.map((scannedItem) => {
+    const product = productDetails.find((p) => p.SKU === scannedItem.SKU);
+
+    if (product) {
+      return {
+        SKU: scannedItem.SKU,
+        CorrectlyPlaced: scannedItem.zone === product.zone,
+        currentZone: scannedItem.zone,
+        correctZone: product.zone,
+      };
+    } else {
+      return {
+        SKU: scannedItem.SKU,
+        CorrectlyPlaced: false,
+        currentZone: scannedItem.zone,
+        correctZone: "unknown",
+      };
+    }
+  });
+  // console.log(response);
+  
+  return response;
+}
+module.exports = { createResponse, createResponse2 };

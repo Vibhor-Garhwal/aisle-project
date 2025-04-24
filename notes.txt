@@ -1,3 +1,45 @@
 Further actions - 
 
 1. Take the radar count from the backend in the get request itself
+
+Discussion on 9-April
+Shelf position
+Sku jeans, shirts, t shirt 
+Radar zone r1, r2... Or zone 
+Zones can be anything trial room pos
+
+Rack no. 
+Zones
+Sku
+Names
+
+Sku detected in r1 
+
+Api 
+Product table is managed by store or by me
+
+Placement correct flag which is true or false
+Correct zone is green
+Incorrect must be flagged red and shown in the frontend
+
+Product data
+Sku no.
+Product name
+Rack no. Or zone
+Zone is the radar
+Product image
+Product size, price, colour
+
+
+
+Ravis table will have
+Zone
+Sku
+
+
+in the api i need to return a response like: Array of such details for only false values of CorrectlyPlaced
+
+SKU - 2
+CorrectlyPlaced - true/false
+currentZone - A
+correctZone - B

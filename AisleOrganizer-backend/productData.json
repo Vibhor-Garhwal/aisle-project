@@ -1,0 +1,164 @@
+{
+    "data":[
+        {
+            "SKU": 1,
+            "name": "Product 1",
+            "zone": "A",
+            "image": "link1",
+            "size": 42,
+            "color": "red"
+        },
+        {
+            "SKU": 2,
+            "name": "Product 2",
+            "zone": "B",
+            "image": "link2",
+            "size": 40,
+            "color": "blue"
+        },
+        {
+            "SKU": 3,
+            "name": "Product 3",
+            "zone": "C",
+            "image": "link3",
+            "size": 44,
+            "color": "green"
+        },
+        {
+            "SKU": 4,
+            "name": "Product 4",
+            "zone": "A",
+            "image": "link4",
+            "size": 38,
+            "color": "yellow"
+        },
+        {
+            "SKU": 5,
+            "name": "Product 5",
+            "zone": "B",
+            "image": "link5",
+            "size": 46,
+            "color": "black"
+        },
+        {
+            "SKU": 6,
+            "name": "Product 6",
+            "zone": "C",
+            "image": "link6",
+            "size": 36,
+            "color": "white"
+        },
+        {
+            "SKU": 7,
+            "name": "Product 7",
+            "zone": "A",
+            "image": "link7",
+            "size": 40,
+            "color": "gray"
+        },
+        {
+            "SKU": 8,
+            "name": "Product 8",
+            "zone": "B",
+            "image": "link8",
+            "size": 48,
+            "color": "red"
+        },
+        {
+            "SKU": 9,
+            "name": "Product 9",
+            "zone": "C",
+            "image": "link9",
+            "size": 42,
+            "color": "blue"
+        },
+        {
+            "SKU": 10,
+            "name": "Product 10",
+            "zone": "A",
+            "image": "link10",
+            "size": 40,
+            "color": "green"
+        },
+        {
+            "SKU": 11,
+            "name": "Product 11",
+            "zone": "B",
+            "image": "link11",
+            "size": 44,
+            "color": "yellow"
+        },
+        {
+            "SKU": 12,
+            "name": "Product 12",
+            "zone": "C",
+            "image": "link12",
+            "size": 38,
+            "color": "black"
+        },
+        {
+            "SKU": 13,
+            "name": "Product 13",
+            "zone": "A",
+            "image": "link13",
+            "size": 46,
+            "color": "white"
+        },
+        {
+            "SKU": 14,
+            "name": "Product 14",
+            "zone": "B",
+            "image": "link14",
+            "size": 50,
+            "color": "gray"
+        },
+        {
+            "SKU": 15,
+            "name": "Product 15",
+            "zone": "C",
+            "image": "link15",
+            "size": 42,
+            "color": "red"
+        },
+        {
+            "SKU": 16,
+            "name": "Product 16",
+            "zone": "A",
+            "image": "link16",
+            "size": 48,
+            "color": "blue"
+        },
+        {
+            "SKU": 17,
+            "name": "Product 17",
+            "zone": "B",
+            "image": "link17",
+            "size": 44,
+            "color": "green"
+        },
+        {
+            "SKU": 18,
+            "name": "Product 18",
+            "zone": "C",
+            "image": "link18",
+            "size": 40,
+            "color": "yellow"
+        },
+        {
+            "SKU": 19,
+            "name": "Product 19",
+            "zone": "A",
+            "image": "link19",
+            "size": 46,
+            "color": "black"
+        },
+        {
+            "SKU": 20,
+            "name": "Product 20",
+            "zone": "B",
+            "image": "link20",
+            "size": 38,
+            "color": "white"
+        }
+    ]
+}

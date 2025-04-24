@@ -1,7 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const { createProductJSON, createResponseJSON } = require("./routes/utilities");
-const  createResponse  = require("./createResponse");
+const {
+  createProductJSON,
+  createResponseJSON,
+  groupByCurrentZone,
+} = require("./routes/utilities");
+const { createResponse, createResponse2 } = require("./createResponse");
 
 const app = express();
 
@@ -13,9 +17,12 @@ app.get("/", (req, res) => {
   const response = createResponseJSON(product);
   res.json(response);
 });
-app.get("/mapping", async(req, res) => {
+app.get("/mapping", async (req, res) => {
   const mappingDetails = await createResponse();
-  res.status(200).json(mappingDetails);
+  // console.log(mappingDetails);
+  const response = await groupByCurrentZone();
+  // console.log(x);
+  res.status(200).json(response);
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));

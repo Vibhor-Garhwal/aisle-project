@@ -30,11 +30,15 @@ const RadarModal = ({ radarId }) => {
 
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/?n=10`);
+                const response = await fetch(`http://localhost:3000/`);
                 const jsonData = await response.json();
                 const radarData = jsonData[`R${radarId}`] || {};
-                console.log('Fetched Data:', radarData);
+                // console.log('Fetched Data:', radarData);
                 setData(radarData);
+                // console.log(data);
+                // const x = await createSKUResponse();
+                // setData(x);
+                // console.log(x);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -69,10 +73,10 @@ const RadarData = ({ data, closeModal }) => {
         <div
             className='productsContainer'
             style={{
-                width: '300px',
+                width: '400px',
                 height: '500px',
                 // backgroundColor:'#E4EFE7',
-                borderRadius: '29px',
+                borderRadius: '2px',
                 padding:'10px',
                 border: '1px solid black',
                 position: 'fixed', // Use fixed positioning to center relative to the viewport
