@@ -9,8 +9,8 @@ html{
 .shop-container{
     box-sizing: border-box;
     padding: 10px;
-    height: 100vh;
-    width: 100vw;
+    height: 95vh;
+    width: 95vw;
     /* background-image: url('./assets/ShopLayout.png'); */
     background-size: cover;
     /* background-repeat: no-repeat; */
@@ -22,6 +22,7 @@ html{
     grid-auto-columns: min-content; /* Prevent columns from stretching */
     /* align-items: center; Center items vertically */
     /* justify-items: center; Center items horizontally */
+
 }
 .radarCircle{
     height: 50px;
@@ -48,6 +49,18 @@ html{
     grid-column: 1 / span 1;
     grid-row: 10 / span 1;
 }
+#RA{
+    grid-column: 4 / span 1;
+    grid-row: 1 / span 1;
+}
+#RB{
+    grid-column: 12 / span 1;
+    grid-row: -2 / span 1;
+}
+#RC{
+    grid-column: 1 / span 1;
+    grid-row: 10 / span 1;
+}
 
 .shop-section{
     display: flex; /* Use flexbox to center content */
@@ -62,4 +75,17 @@ html{
     /* font-size: 1.2rem; */
     /* font-weight: bold; */
     padding: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
 }
