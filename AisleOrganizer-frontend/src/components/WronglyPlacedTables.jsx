@@ -34,7 +34,8 @@ const WronglyPlacedTables = () => {
 
     return (
         <section style={tablesSectionStyle}>
-            <h1 style={mainHeadingStyle}>Wrongly Placed Items (Zone Wise)</h1>
+            <h1 style={mainHeadingStyle}>Wrongly Placed Items </h1>
+            <h2 style={subHeadingStyle}> Zone Wise</h2>
             <div style={cardGridStyle}>
                 {Object.keys(zoneWiseWrongItems).length === 0 ? (
                     <p>No wrongly placed items found!</p>
@@ -46,6 +47,7 @@ const WronglyPlacedTables = () => {
                                 <thead>
                                     <tr>
                                         <th style={tableHeaderStyle}>SKU</th>
+                                        <th style={tableHeaderStyle}>Name</th>
                                         <th style={tableHeaderStyle}>Correct Zone</th>
                                     </tr>
                                 </thead>
@@ -53,6 +55,7 @@ const WronglyPlacedTables = () => {
                                     {zoneWiseWrongItems[zone].map((item, idx) => (
                                         <tr key={idx}>
                                             <td style={wrongItemStyle}>{item.SKU}</td>
+                                            <td style={wrongItemStyle}></td>
                                             <td style={wrongItemStyle}>{zoneNameMapping[item.correctZone]}</td>
                                         </tr>
                                     ))}
@@ -67,6 +70,12 @@ const WronglyPlacedTables = () => {
 };
 
 // === CSS in JS ===
+
+const subHeadingStyle = {
+    marginBottom: '10px',
+    fontSize: '1.5rem',
+    textAlign: 'center'
+}
 
 const tablesSectionStyle = {
     padding: '20px',
@@ -107,13 +116,14 @@ const tableHeaderStyle = {
     padding: '8px',
     borderBottom: '2px solid #eee',
     fontWeight: 'bold',
-    textAlign: 'left',
+    textAlign: 'center',
 };
 
 const wrongItemStyle = {
     padding: '8px',
     borderBottom: '1px solid #eee',
     color: 'red',
+
 };
 
 export default WronglyPlacedTables;

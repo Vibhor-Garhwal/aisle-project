@@ -4,18 +4,23 @@ import WronglyPlacedTables from './WronglyPlacedTables';
 
 const ShopLayout = () => {
     return (
-        <div>
-            <WronglyPlacedTables />
-            <div className='shop-container'>
-                <RadarModal radarId="1" radarZone="Shop" />
-                <RadarModal radarId="2" radarZone="Entry" />
-                <RadarModal radarId="3" radarZone="Trial" />
-                <ShopSection sectionName="POS" gridPosition={{ column: '5 / span 4', row: '-1 / span 1' }} />
-                <ShopSection sectionName="Trial Room" gridPosition={{ column: '1 / span 2', row: '-1 / span 1' }} />
-                <ShopSection sectionName="Entry" gridPosition={{ column: '12 / span 1', row: '-1 / span 2' }} />
-                <ShopSection sectionName="Aisle 1" gridPosition={{ column: '5 / span 8', row: '1 / span 1' }} />
-                <ShopSection sectionName="Aisle 2" gridPosition={{ column: '5 / span 8', row: '5 / span 1' }} />
-                <ShopSection sectionName="Aisle 3" gridPosition={{ column: '1 / span 1', row: '1 / span 7' }} />
+        <div className='main-container'>
+            <div className='left-section'>
+                <WronglyPlacedTables />
+            </div>
+
+            <div className='right-section'>
+                <div className='shop-container'>
+                    <RadarModal radarId="1" radarZone="Shop" />
+                    <RadarModal radarId="2" radarZone="Entry" />
+                    <RadarModal radarId="3" radarZone="Trial" />
+                    <ShopSection sectionName="POS" gridPosition={{ column: '5 / span 4', row: '-1 / span 1' }} />
+                    <ShopSection sectionName="Trial Room" gridPosition={{ column: '1 / span 2', row: '-1 / span 1' }} />
+                    <ShopSection sectionName="Entry" gridPosition={{ column: '12 / span 1', row: '-1 / span 2' }} />
+                    <ShopSection sectionName="Aisle 1" gridPosition={{ column: '5 / span 8', row: '1 / span 1' }} />
+                    <ShopSection sectionName="Aisle 2" gridPosition={{ column: '5 / span 8', row: '5 / span 1' }} />
+                    <ShopSection sectionName="Aisle 3" gridPosition={{ column: '1 / span 1', row: '1 / span 7' }} />
+                </div>
             </div>
         </div>
     );
@@ -94,6 +99,7 @@ const wrongItemStyle = {
 const RadarModal = ({ radarId, radarZone = "" }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [data, setData] = useState(null);
+    let countOfItems = 0;
 
     useEffect(() => {
         if (!isOpen) return; // Only fetch if modal is open
@@ -143,16 +149,20 @@ const RadarModal = ({ radarId, radarZone = "" }) => {
 
     return (
         <div className='radar-container' id={`R${radarId}`}>
-            <RadarCircle radarId={radarId} radarZone={radarZone} toggleModal={() => setIsOpen((prev) => !prev)} />
+            <RadarCircle radarId={radarId} radarZone={radarZone} count={data?.length || 0} toggleModal={() => setIsOpen((prev) => !prev)} />
             {isOpen && <RadarData data={data} closeModal={() => setIsOpen(false)} />}
+            {/* {!isOpen && <RadarOverlay count={ 5 } />} */}
         </div>
     );
 };
 
-const RadarCircle = ({ id, radarId, toggleModal, radarZone = "" }) => {
+const RadarCircle = ({ id, radarId, toggleModal, radarZone = "", count = 0 }) => {
     return (
         <button id={id} className='radarCircle' onClick={toggleModal} type='button'>
             {radarZone === "" ? `R${radarId}` : radarZone}
+            {count > 0 && (
+                <span className='radar-badge'>{count}</span>
+            )}
         </button>
     );
 };
@@ -167,7 +177,7 @@ const RadarData = ({ data, closeModal }) => {
                 borderRadius: '2px',
                 padding: '10px',
                 border: '1px solid black',
-                position: 'fixed',
+                position: 'absolute',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
@@ -200,5 +210,9 @@ const ShopSection = ({ sectionName, gridPosition }) => {
         </div>
     );
 };
+
+const RadarOverlay = ({ count }) => {
+    return <div className='radar-overlay'></div>
+}
 
 export default ShopLayout;
