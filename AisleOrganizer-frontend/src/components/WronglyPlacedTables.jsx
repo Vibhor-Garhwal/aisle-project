@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const WronglyPlacedTables = () => {
     const [zoneWiseWrongItems, setZoneWiseWrongItems] = useState({});
+    const [selectedZone, setSelectedZone] = useState(null);
+
+    const handleToggle = (zone) => {
+        setSelectedZone(prev => (prev === zone ? null : zone));
+    };
 
     const zoneNameMapping = {
         B: 'Entry',
@@ -34,33 +39,43 @@ const WronglyPlacedTables = () => {
 
     return (
         <section style={tablesSectionStyle}>
-            <h1 style={mainHeadingStyle}>Wrongly Placed Items </h1>
-            <h2 style={subHeadingStyle}> Zone Wise</h2>
+            <h2 style={subHeadingStyle}>Wrongly Placed Items - Zone Wise</h2>
             <div style={cardGridStyle}>
                 {Object.keys(zoneWiseWrongItems).length === 0 ? (
                     <p>No wrongly placed items found!</p>
                 ) : (
                     Object.keys(zoneWiseWrongItems).map((zone, index) => (
                         <div key={index} style={cardStyle}>
-                            <h2 style={zoneHeaderStyle}>{zoneNameMapping[zone] || zone}</h2>
-                            <table style={tableStyle}>
-                                <thead>
-                                    <tr>
-                                        <th style={tableHeaderStyle}>SKU</th>
-                                        <th style={tableHeaderStyle}>Name</th>
-                                        <th style={tableHeaderStyle}>Correct Zone</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {zoneWiseWrongItems[zone].map((item, idx) => (
-                                        <tr key={idx}>
-                                            <td style={wrongItemStyle}>{item.SKU}</td>
-                                            <td style={wrongItemStyle}></td>
-                                            <td style={wrongItemStyle}>{zoneNameMapping[item.correctZone]}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <div onClick={() => handleToggle(zone)} style={{ cursor: 'pointer' }}>
+                                <ZoneCard
+                                    room={zoneNameMapping[zone] || zone}
+                                    health={100 - zoneWiseWrongItems[zone].length * 10}
+                                    misplaced={zoneWiseWrongItems[zone].length}
+                                />
+                            </div>
+                            {selectedZone === zone && (
+                                <>
+                                    <h2 style={zoneHeaderStyle}>{zoneNameMapping[zone] || zone}</h2>
+                                    <table style={tableStyle}>
+                                        <thead>
+                                            <tr>
+                                                <th style={tableHeaderStyle}>SKU</th>
+                                                <th style={tableHeaderStyle}>Name</th>
+                                                <th style={tableHeaderStyle}>Correct Zone</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {zoneWiseWrongItems[zone].map((item, idx) => (
+                                                <tr key={idx}>
+                                                    <td style={wrongItemStyle}>{item.SKU}</td>
+                                                    <td style={wrongItemStyle}>{item.Name || '-'}</td>
+                                                    <td style={wrongItemStyle}>{zoneNameMapping[item.correctZone]}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </>
+                            )}
                         </div>
                     ))
                 )}
@@ -69,42 +84,119 @@ const WronglyPlacedTables = () => {
     );
 };
 
-// === CSS in JS ===
+const ZoneCard = ({ room = "Trial Room", health = 80, misplaced = 3 }) => {
+    const getStatusColor = (value) => {
+        if (value >= 80) return "#16a34a"; // green
+        if (value >= 70) return "#ca8a04"; // yellow
+        return "#dc2626"; // red
+    };
 
-const subHeadingStyle = {
-    marginBottom: '10px',
-    fontSize: '1.5rem',
-    textAlign: 'center'
-}
+    const styles = {
+        card: {
+            backgroundColor: "#ffffff",
+            color: "#111827",
+            borderRadius: "16px",
+            padding: "24px",
+            boxShadow: "0 6px 12px rgba(0,0,0,0.06)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "",
+            gap: "10px",
+            fontFamily: "Arial, sans-serif",
+        },
+        header: {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            // gap: "10px",
+            fontSize: "22px",
+            fontWeight: "700",
+            textTransform: "uppercase",
+        },
+        statusDot: {
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            backgroundColor: getStatusColor(health),
+            boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+        },
+        health: {
+            fontSize: "70px",
+            fontWeight: "800",
+            color: getStatusColor(health),
+        },
+        footer: {
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "16px",
+            color: "#374151"
+        },
+        misplacedNumber: {
+            fontSize: "20px",
+            fontWeight: "700",
+            color: "#ef4444"
+        },
+        misplacedIcon: {
+            width: "20px",
+            height: "20px",
+            backgroundColor: getStatusColor(health),
+            borderRadius: "4px"
+        }
+    };
 
-const tablesSectionStyle = {
-    padding: '20px',
-    backgroundColor: '#f7f7f7',
+    return (
+        <div style={styles.card}>
+            <div style={styles.header}>
+                <span style={styles.header}>{room}</span>
+                <div style={styles.statusDot} />
+            </div>
+            <div style={styles.health}>{health}%</div>
+            <div style={styles.footer}>
+                <div style={styles.misplacedIcon} />
+                <span style={{
+                    fontSize: '20px'
+                }}>Misplaced</span>
+                <span style={styles.misplacedNumber}>{misplaced}</span>
+            </div>
+        </div>
+    );
 };
 
-const mainHeadingStyle = {
+
+// === Styles ===
+const tablesSectionStyle = {
+    padding: '10px',
+    // minHeight: '100vh',
+};
+
+const subHeadingStyle = {
     marginBottom: '20px',
-    fontSize: '2rem',
+    fontSize: '1.75rem',
     textAlign: 'center',
+    color: '#111827',
 };
 
 const cardGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    display: 'flex',
+    flexDirection: 'column',
     gap: '20px',
 };
 
 const cardStyle = {
-    backgroundColor: '#fff',
-    borderRadius: '10px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    padding: '20px',
+    backgroundColor: '#ffffff',
+    borderRadius: '12px',
+    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.05)',
+    padding: '16px',
+    transition: 'all 0.3s ease',
 };
 
 const zoneHeaderStyle = {
+    marginTop: '12px',
     marginBottom: '10px',
-    fontSize: '1.5rem',
+    fontSize: '1.25rem',
     textAlign: 'center',
+    color: '#374151',
 };
 
 const tableStyle = {
@@ -113,17 +205,19 @@ const tableStyle = {
 };
 
 const tableHeaderStyle = {
-    padding: '8px',
-    borderBottom: '2px solid #eee',
-    fontWeight: 'bold',
+    padding: '10px',
+    borderBottom: '2px solid #e5e7eb',
+    backgroundColor: '#f3f4f6',
+    fontWeight: '600',
     textAlign: 'center',
+    color: '#111827'
 };
 
 const wrongItemStyle = {
-    padding: '8px',
-    borderBottom: '1px solid #eee',
-    color: 'red',
-
+    padding: '10px',
+    borderBottom: '1px solid #e5e7eb',
+    textAlign: 'center',
+    color: '#b91c1c'
 };
 
 export default WronglyPlacedTables;

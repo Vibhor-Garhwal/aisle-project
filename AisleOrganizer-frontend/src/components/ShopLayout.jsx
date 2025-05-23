@@ -1,30 +1,146 @@
 import React, { useState, useEffect } from 'react';
 import Draggable from "react-draggable";
 import WronglyPlacedTables from './WronglyPlacedTables';
+import bgImage from '../assets/Desktop - 1.png';
+
+
 
 const ShopLayout = () => {
     return (
-        <div className='main-container'>
-            <div className='left-section'>
-                <WronglyPlacedTables />
-            </div>
+        <>
+            <HeaderSection />
+            <div className='main-container'>
+                <div className='left-section'>
+                    <WronglyPlacedTables />
+                </div>
 
-            <div className='right-section'>
-                <div className='shop-container'>
-                    <RadarModal radarId="1" radarZone="Shop" />
-                    <RadarModal radarId="2" radarZone="Entry" />
-                    <RadarModal radarId="3" radarZone="Trial" />
-                    <ShopSection sectionName="POS" gridPosition={{ column: '5 / span 4', row: '-1 / span 1' }} />
-                    <ShopSection sectionName="Trial Room" gridPosition={{ column: '1 / span 2', row: '-1 / span 1' }} />
-                    <ShopSection sectionName="Entry" gridPosition={{ column: '12 / span 1', row: '-1 / span 2' }} />
-                    <ShopSection sectionName="Aisle 1" gridPosition={{ column: '5 / span 8', row: '1 / span 1' }} />
-                    <ShopSection sectionName="Aisle 2" gridPosition={{ column: '5 / span 8', row: '5 / span 1' }} />
-                    <ShopSection sectionName="Aisle 3" gridPosition={{ column: '1 / span 1', row: '1 / span 7' }} />
+                <div className='right-section' style={{ backgroundImage: `url(${bgImage})` }}>
+                    <TransparentBlock />
+                    <TransparentBlock />
+                    <TransparentBlock />
                 </div>
             </div>
+            <div className='footer'>
+                This is the footer
+            </div>
+        </>
+    );
+};
+
+const HeaderSection = () => {
+    const [modalData, setModalData] = useState(null);
+
+    const handleCardClick = (type) => {
+        let content = {};
+        if (type === "Attendance") {
+            content = { title: "Attendance", details: "Attendance is 95%" };
+        } else if (type === "Footfall") {
+            content = { title: "Footfall", details: "Today’s footfall is 320" };
+        } else if (type === "Store") {
+            content = { title: "Store Details", details: "Store Code: ST123\nStore Name: FashionHub" };
+        }
+        setModalData(content);
+    };
+
+    return (
+        <div className='header-section' style={headerSectionStyle}>
+            <h1 style={applicationName}>Application-Name</h1>
+            <div style={headerDetailsStyle}>
+                <DetailCard title="Attendance" value="95%" onClick={() => handleCardClick("Attendance")} />
+                <DetailCard title="Footfall" value="320" onClick={() => handleCardClick("Footfall")} />
+                <DetailCard title="Store" value="ST123" onClick={() => handleCardClick("Store")} />
+            </div>
+            {modalData && (
+                <DetailModal
+                    title={modalData.title}
+                    details={modalData.details}
+                    onClose={() => setModalData(null)}
+                />
+            )}
         </div>
     );
 };
+const DetailCard = ({ title, value, onClick }) => (
+    <div
+        onClick={onClick}
+        style={{
+            marginLeft: '10px',
+            padding: '10px 15px',
+            backgroundColor: '#f0f0f0',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            minWidth: '80px',
+            boxShadow: '0 0 4px rgba(0,0,0,0.1)',
+            textAlign: 'center',
+        }}
+    >
+        <strong>{title}</strong><br />
+        <h2>{value}</h2>
+    </div>
+);
+const DetailModal = ({ title, details, onClose }) => (
+    <div style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'white',
+        padding: '20px',
+        border: '1px solid black',
+        borderRadius: '8px',
+        zIndex: 9999,
+        boxShadow: '0 0 10px rgba(0,0,0,0.3)',
+        minWidth: '300px'
+    }}>
+        <button onClick={onClose} style={{
+            position: 'absolute',
+            top: 10,
+            right: 10,
+            background: 'transparent',
+            border: 'none',
+            fontSize: '30px',
+            cursor: 'pointer',
+            color: 'red',
+        }}>×</button>
+        <h2>{title}</h2>
+        <pre style={{ whiteSpace: 'pre-wrap' }}>{details}</pre>
+    </div>
+);
+
+const getBackgroundColor = (count) => {
+    if (count <= 7) return 'rgba(0, 255, 0, 0.2)';
+    if (count <= 12) return 'rgba(255, 165, 0, 0.2)';
+    return 'rgba(255, 0, 0, 0.2)';
+};
+
+const generateDots = (count) => {
+    return Array.from({ length: count }).map((_, i) => ({
+        id: i,
+        top: Math.random() * 90,
+        left: Math.random() * 90
+    }));
+};  
+
+const TransparentBlock = () => {
+    const dotCount = Math.floor(Math.random() * 11) + 5; // 5–15
+    const dots = generateDots(dotCount);
+    const bgColor = getBackgroundColor(dotCount);
+
+    return (
+        <div className="transparent-block" style={{ backgroundColor: bgColor }}>
+            {dots.map(dot => (
+                <div
+                    key={dot.id}
+                    className="red-dot"
+                    style={{ top: `${dot.top}%`, left: `${dot.left}%` }}
+                />
+            ))}
+        </div>
+    );
+};
+
+
+
 
 const WronglyPlacedTable = () => {
     const [wronglyPlacedItems, setWronglyPlacedItems] = useState([]);
@@ -81,6 +197,29 @@ const WronglyPlacedTable = () => {
             </table>
         </div>
     );
+};
+
+const applicationName = {
+    //use this to style the application name
+    fontSize: '24px',
+    fontWeight: 'bold',
+    marginLeft: '20px',
+}
+const headerSectionStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    height: '10vh',
+    // borderBottom: '1px solid black',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    marginBottom: '20px',
+    padding: '10px',
+    alignItems: 'center',
+}
+const headerDetailsStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    marginRight: '20px',
 };
 
 const tableHeaderStyle = {
@@ -214,5 +353,7 @@ const ShopSection = ({ sectionName, gridPosition }) => {
 const RadarOverlay = ({ count }) => {
     return <div className='radar-overlay'></div>
 }
+
+
 
 export default ShopLayout;
